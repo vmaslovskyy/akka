@@ -30,9 +30,9 @@ public class Worker extends UntypedActor
 	 * @return
 	 * @throws IOException
 	 */
-	private ConcurrentMap<String, Integer> countIds(List<String> lines, Integer lineFrom, Integer lineTo, ConcurrentMap< String, Integer> resultMap) throws IOException
+	private ConcurrentMap<String, Integer> countIds(List<String> lines, ConcurrentMap< String, Integer> resultMap) throws IOException
 	{
-		for(Integer index = lineFrom; index <= lineTo; index++)
+		for(Integer index = 1; index <= lines.size(); index++)
 		{
 			String line = lines.get(index);
 			String[] currentLineData = line.split(";");
@@ -51,7 +51,7 @@ public class Worker extends UntypedActor
 		{
 			log.info("Received Work");
 			Work work = (Work) message;
-			ConcurrentMap<String, Integer> result = countIds(work.getLines(), work.getLineFrom(), work.getLineTo(), work.getResultMap());
+			ConcurrentMap<String, Integer> result = countIds(work.getLines(), work.getResultMap());
 		    getSender().tell(new Result(result), getSelf());
 		} 
 		else 
