@@ -14,7 +14,6 @@ public class Work implements Serializable
 	private List<String> lines;
 	private ConcurrentMap<String, Integer> resultMap;
 	
-	
 	public List<String> getLines() {
 		return lines;
 	}
